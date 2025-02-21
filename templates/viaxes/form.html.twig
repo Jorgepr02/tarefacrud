@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2 class="mb-3">{{ is_edit ? 'Editar Viaxe' : 'Crear Novo Viaxe' }}</h2>
+
+    {{ form_start(form) }}
+        <div class="mb-3">
+            {{ form_row(form.destino) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.data) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.duracion) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.motivo) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.transporte) }}
+        </div>
+        <div class="mb-3">
+            {{ form_row(form.aloxamento) }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">{{ is_edit ? 'Actualizar' : 'Crear' }}</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('listar_viaxes') }}" class="btn btn-secondary mt-3 mb-3">Volver</a>
+</div>
+{% endblock %}

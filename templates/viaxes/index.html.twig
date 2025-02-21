@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mt-4">
+    <h2 class="mb-3 text-center">Listado de viaxes</h2>
+    <div class="table-responsive">
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Destino</th>
+                <th>Fecha</th>
+                <th>Duración (días)</th>
+                <th>Motivo</th>
+                <th>Transporte</th>
+                <th>Alojamiento</th>
+                <th>Ver</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for viaxe in viaxes %}
+                <tr>
+                    <td>{{ viaxe.id }}</td>
+                    <td>{{ viaxe.destino }}</td>
+                    <td>{{ viaxe.data|date('d-m-Y') }}</td>
+                    <td>{{ viaxe.duracion }}</td>
+                    <td>{{ viaxe.motivo ?: '-' }}</td>
+                    <td>{{ viaxe.transporte }}</td>
+                    <td>{{ viaxe.aloxamento ?: '-' }}</td>
+                    <td><a href="{{ path('detalle_viaxe', {'id': viaxe.id}) }}" class="btn btn-info btn-sm">Ver</a></td>
+                    <td><a href="{{ path('editar_viaxe', {'id': viaxe.id}) }}" class="btn btn-success btn-sm">Editar</a></td>
+                    <td>
+                        <a href="#" class="btn btn-danger btn-sm" onclick="eliminarViaje({{ viaxe.id }})">Eliminar</a>
+                        <form id="delete-form-{{ viaxe.id }}" action="{{ path('eliminar_viaxe', {'id': viaxe.id}) }}" method="post" style="display: none;">
+                            <input type="hidden" name="_token" value="{{ csrf_token('eliminar' ~ viaxe.id) }}">
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="8" class="text-center">No hay viaxes registrados.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+        <div class="text-center">
+            <a href="{{ path('crear_viaxe') }}" class="btn btn-success btn-sm mt-1 mb-3">Crear</a>
+        </div>
+</div>
+{% endblock %}
