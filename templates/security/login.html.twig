@@ -15,8 +15,15 @@
     {% endif %}
     <h1 class="h3 my-3 font-weight-normal">Inicia sesión</h1>
     <div class="d-flex flex-column align-items-center">
+
+    {# Usuario: admin #}
+
+
     <label for="inputUsername">Usuario</label>
     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control w-25 mt-1 mb-2" autocomplete="username" required autofocus>
+
+    {# Contrasinal: admin #}
+
     <label for="inputPassword"">Contrasinal</label>
     <input type="password" name="password" id="inputPassword" class="form-control w-25 my-1" autocomplete="current-password" required>
     </div>
