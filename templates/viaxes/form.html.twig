@@ -29,4 +29,9 @@
 
     <a href="{{ path('listar_viaxes') }}" class="btn btn-secondary mt-3 mb-3">Volver</a>
 </div>
+<div class="text-center my-3">
+    <form method="post" action="{{ path('app_logout') }}">
+        <button class="btn btn-lg btn-secondary align-self-center mt-5" type="submit">Pechar sesión</button>
+    </form>
+</div>
 {% endblock %}

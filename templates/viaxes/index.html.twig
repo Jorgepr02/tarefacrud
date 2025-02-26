@@ -9,11 +9,11 @@
             <tr>
                 <th>ID</th>
                 <th>Destino</th>
-                <th>Fecha</th>
+                <th>Data</th>
                 <th>Duración (días)</th>
                 <th>Motivo</th>
                 <th>Transporte</th>
-                <th>Alojamiento</th>
+                <th>Aloxamento</th>
                 <th>Ver</th>
                 <th>Editar</th>
                 <th>Eliminar</th>
@@ -50,4 +50,9 @@
             <a href="{{ path('crear_viaxe') }}" class="btn btn-success btn-sm mt-1 mb-3">Crear</a>
         </div>
 </div>
+<div class="text-center my-3">
+        <form method="post" action="{{ path('app_logout') }}">
+            <button class="btn btn-lg btn-secondary align-self-center mt-5" type="submit">Pechar sesión</button>
+        </form>
+        </div>
 {% endblock %}

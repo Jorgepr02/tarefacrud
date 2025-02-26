@@ -9,10 +9,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 
 final class ViaxesController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/viaxes', name: 'app_viaxes')]
     public function rexistrarViaxes(EntityManagerInterface $entityManager): Response
     {
@@ -57,7 +59,7 @@ final class ViaxesController extends AbstractController
             return $this->render('viaxes/detalle.html.twig', ['viaxe' => $historialViaxes,]);
         }
 
-        #[Route('viaxes/editar/{id}', name: 'editar_viaxe')]
+        #[Route('/viaxes/editar/{id}', name: 'editar_viaxe')]
         public function editarViaxes(Request $request, EntityManagerInterface $entityManager, HistorialViaxes $viaxe): Response
         {
         $form = $this->createForm(HistorialViaxesType::class, $viaxe);
@@ -76,7 +78,7 @@ final class ViaxesController extends AbstractController
         ]);
         }
 
-        #[Route('viaxes/crear', name: 'crear_viaxe')]
+        #[Route('/viaxes/crear', name: 'crear_viaxe')]
         public function crearViaxes(Request $request, EntityManagerInterface $entityManager): Response
         {
             $viaxe = new HistorialViaxes();
@@ -97,7 +99,7 @@ final class ViaxesController extends AbstractController
             ]);
         }
         
-        #[Route('viaxes/eliminar/{id}', name: 'eliminar_viaxe', methods: ['POST', 'DELETE'])]
+        #[Route('/viaxes/eliminar/{id}', name: 'eliminar_viaxe', methods: ['POST', 'DELETE'])]
         public function eliminarViaxe(Request $request, EntityManagerInterface $entityManager, HistorialViaxes $viaxe): Response
         {
             if ($this->isCsrfTokenValid('eliminar' . $viaxe->getId(), $request->request->get('_token'))) {
