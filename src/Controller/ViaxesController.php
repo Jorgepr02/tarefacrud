@@ -119,7 +119,15 @@ final class ViaxesController extends AbstractController
     public function estadisticasViaxes(EntityManagerInterface $entityManager): Response
     {
         $cuenta = $entityManager->getRepository(HistorialViaxes::class)->count([]);
+        $viaxes = $entityManager->getRepository(HistorialViaxes::class)->findAll();
+        $sum=0;
+ 
+        foreach ($viaxes as $viaxe){
+            $sum += $viaxe->getDuracion();
+        }
 
-        return $this->render('viaxes/estadisticas.html.twig', ['cuenta' => $cuenta,]);
+        $media = $sum/$cuenta;
+
+        return $this->render('viaxes/estadisticas.html.twig', ['cuenta' => $cuenta, 'media' => $media]);
     }
 }
