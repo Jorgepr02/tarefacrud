@@ -3,6 +3,10 @@
 {% block body %}
 <div class="container mt-4">
     <h2 class="mb-3 text-center">Listado de viaxes</h2>
+    <form action="{{ path('viaxe_buscar') }}" method="get" class="d-flex mb-3">
+        <input type="text" name="busqueda" placeholder="Buscar en viaxes..." class="form-control me-2">
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
     <div class="table-responsive">
     <table class="table table-striped table-bordered">
         <thead class="table-dark">

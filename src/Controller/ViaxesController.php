@@ -130,4 +130,24 @@ final class ViaxesController extends AbstractController
 
         return $this->render('viaxes/estadisticas.html.twig', ['cuenta' => $cuenta, 'media' => $media]);
     }
+
+    #[Route('/viaxes/buscar', name: 'viaxe_buscar')]
+    public function list(Request $request, EntityManagerInterface $em): Response
+    {
+        $searchTerm = $request->query->get('busqueda');
+        $queryBuilder = $em->getRepository(HistorialViaxes::class)->createQueryBuilder('v');
+
+        if ($searchTerm) {
+            $queryBuilder
+                ->where('LOWER(v.destino) LIKE LOWER(:term)')
+                ->setParameter('term', '%' . $searchTerm . '%');
+        }
+
+        $viaxes = $queryBuilder->getQuery()->getResult();
+
+        return $this->render('viaxes/index.html.twig', [
+            'viaxes' => $viaxes,
+            'searchTerm' => $searchTerm
+        ]);
+    }
 }
