@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container mt-4 w-50">
+    <h2 class="mb-3">Estadísticas</h2>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Número total: {{ cuenta }}</h5>
+        </div>
+    </div>
+    <div class="mt-3 mb-3">
+        <a href="{{ path('listar_viaxes') }}" class="btn btn-secondary">Volver</a>
+    </div>
+</div>
+<div class="text-center my-3">
+    <form method="post" action="{{ path('app_logout') }}">
+        <button class="btn btn-lg btn-secondary align-self-center mt-5" type="submit">Pechar sesión</button>
+    </form>
+</div>
+{% endblock %}

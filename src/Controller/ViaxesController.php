@@ -45,6 +45,7 @@ final class ViaxesController extends AbstractController
 
         return new Response('8 rexistros de viaxes engadidos correctamente!');
         }
+
         #[Route('/viaxes/listar', name: 'listar_viaxes')]
         public function listarViaxes(EntityManagerInterface $entityManager): Response
         {
@@ -112,5 +113,13 @@ final class ViaxesController extends AbstractController
             }
 
             return $this->redirectToRoute('listar_viaxes');
+    }
+
+    #[Route('/viaxes/estadisticas', name: 'estadisticas_viaxes')]
+    public function estadisticasViaxes(EntityManagerInterface $entityManager): Response
+    {
+        $cuenta = $entityManager->getRepository(HistorialViaxes::class)->count([]);
+
+        return $this->render('viaxes/estadisticas.html.twig', ['cuenta' => $cuenta,]);
     }
 }
